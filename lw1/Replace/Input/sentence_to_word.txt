@@ -1,0 +1,1 @@
+Sentence that must be replaced to one word.
