@@ -1,1 +1,1 @@
-sh tests.sh main.out
+sh tests.sh MultMatrix.out

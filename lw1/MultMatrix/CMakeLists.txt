@@ -8,7 +8,7 @@ include_directories(Matrix3x3)
 include_directories(Multiplier)
 
 add_executable(MultMatrix
-        main.cpp
+        MultMatrix.cpp
         Matrix3x3/Matrix3x3.cpp
         Matrix3x3/Matrix3x3.h
         Multiplier/Multiplier.cpp
