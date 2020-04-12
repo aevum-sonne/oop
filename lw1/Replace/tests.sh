@@ -11,7 +11,7 @@ readonly EXPECTED_PATH="Expected"
 
 # 1. Without args
 ((currentTest = currentTest+1))
-if (!(./$RUN_PATH))
+if (! (./$RUN_PATH))
     then
         echo "TEST $currentTest PASSED. (Without args).\n"
         ((passedTests = passedTests+1))

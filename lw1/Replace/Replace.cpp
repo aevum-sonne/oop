@@ -2,21 +2,20 @@
 #include <fstream>
 #include <string>
 #include <optional>
-#include <sstream>
 
 // Number of input arguments
-const int ARGS_SIZE = 5;
+const int argsSize = 5;
 
 // Error messages
-const std::string INVALID_ARGUMENTS_COUNT = "Invalid arguments count.\
-Usage: ./replace <input file> <output file> <search string> <replace string>";
-const std::string EMPTY_FILE = "Input file is empty.";
-const std::string BIG_SUBWORD = "Replace subword is bigger then input file.";
-const std::string INPUT_OPEN_FAILED = "Failed to open input file.";
-const std::string INPUT_BAD = "Failed to read data from input file.";
-const std::string OUTPUT_OPEN_FAILED = "Failed to open output file.";
-const std::string OUTPUT_FLUSH = "Failed to write data in output file.";
-const std::string EMPTY_SUBSTRING = "The substring to find shouldn't be empty.";
+const std::string invalidArgumentsCount = "Invalid arguments count.Usage: ./replace "
+                                          "<input file> <output file> <search string> <replace string>";
+const std::string inputIsEmpty = "Input file is empty.";
+const std::string subwordBiggerThenInput = "Replace subword is bigger then input file.";
+const std::string inputOpenFailed = "Failed to open input file.";
+const std::string inputBad = "Failed to read data from input file.";
+const std::string outputOpenFailed = "Failed to open output file.";
+const std::string outputFlush = "Failed to write data in output file.";
+const std::string emptySubstring = "The substring to find shouldn't be empty.";
 
 struct Args
 {
@@ -26,7 +25,7 @@ struct Args
 
 std::optional<Args> ParseArgs(int argc, const char * argv[])
 {
-    if (argc != ARGS_SIZE)
+    if (argc != argsSize)
     {
         return std::nullopt;
     }
@@ -36,6 +35,7 @@ std::optional<Args> ParseArgs(int argc, const char * argv[])
     args.outputFileName = argv[2];
     args.subToSearch = argv[3];
     args.subToReplace = argv[4];
+
     return args;
 }
 
@@ -63,7 +63,8 @@ int main(int argc, const char * argv[])
     
     if (!args)
     {
-        std::cout << INVALID_ARGUMENTS_COUNT << std::endl;
+        std::cout << invalidArgumentsCount << std::endl;
+
         return 1;
     }
     
@@ -73,7 +74,8 @@ int main(int argc, const char * argv[])
     // Check if file isn't open
     if (!input.is_open())
     {
-        std::cout << INPUT_OPEN_FAILED << std::endl;
+        std::cout << inputOpenFailed << std::endl;
+
         return 1;
     }
     
@@ -81,28 +83,32 @@ int main(int argc, const char * argv[])
     
     if (!output.is_open())
     {
-        std::cout << OUTPUT_OPEN_FAILED << std::endl;
+        std::cout << outputOpenFailed << std::endl;
+
         return 1;
     }
     
     // If file is empty
     if (std::filesystem::file_size(args->inputFileName) == 1)
     {
-        std::cout << EMPTY_FILE << std::endl;
+        std::cout << inputIsEmpty << std::endl;
+
         return 1;
     }
     
     // If replace substring is bigger then input file
     if (args->subToSearch.length() >= std::filesystem::file_size(args->inputFileName))
     {
-        std::cout << BIG_SUBWORD << std::endl;
+        std::cout << subwordBiggerThenInput << std::endl;
+
         return 1;
     }
 
     // If replace substring is empty
     if (args->subToSearch.length() == 0)
     {
-        std::cout << EMPTY_SUBSTRING << std::endl;
+        std::cout << emptySubstring << std::endl;
+
         return 1;
     }
     
@@ -119,7 +125,8 @@ int main(int argc, const char * argv[])
     // of the stream.
     if (input.bad())
     {
-        std::cout << INPUT_BAD << std::endl;
+        std::cout << inputBad << std::endl;
+
         return 1;
     }
     
@@ -127,10 +134,10 @@ int main(int argc, const char * argv[])
     // written to the controlled sequence.
     if (!output.flush())
     {
-        std::cout << OUTPUT_FLUSH << std::endl;
+        std::cout << outputFlush << std::endl;
+
         return 1;
     }
     
     return 0;
-    
 }
