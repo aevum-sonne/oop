@@ -2,23 +2,19 @@
 #include <fstream>
 #include <string>
 #include <optional>
-#include <bitset>
 
-const std::string OUTPUT_PATH = "output.txt";
-const char RIGHT_ROTATION = 'R';
-const char LEFT_ROTATION = 'L';
-const int ARGC_SIZE = 4;
-const int SIZE_INT = 32;
+const std::string argcCount = "Invalid arguments count. Usage: ./RotateByte <byte> <shiftInterval> L/R.";
+const std::string negativeValue = "Negative value in <byte> or <shiftInterval>.";
+const std::string byteSize = "The byte number is not in range [0, 255].";
+const std::string notInt = "Invalid value type in <byte> or <shiftInterval> (must be int > 0).";
+const std::string invalidRotation = "Invalid value in <shiftDirection> (must be char by value 'L' or 'R').";
+const std::string outputPath = "output.txt";
 
-// Output error messages
-const std::string ARGC_COUNT = "Invalid arguments count. Usage: ./RotateByte <byte> <shiftInterval> L/R.";
-const std::string NEGATIVE_VALUE = "Negative value in <byte> or <shiftInterval>.";
-const std::string BYTE_SIZE = "The byte number is not in range [0, 255].";
-const std::string NO_BYTE = "There is no byte number entered.";
-const std::string NOT_INT = "Invalid value type in <byte> or <shiftInterval> (must be int > 0).";
-const std::string INVALID_ROTATION = "Invalid value in <shiftDirection> (must be char by value 'L' or 'R').";
+const char rightRotation = 'R';
+const char leftRotation = 'L';
+const int argcSize = 4;
+const int sizeInt = 32;
 
-// Returns 0 if <byte> or <shiftInterval> isn't a number
 bool IsNumber(const std::string& s)
 {
     for (int i = 0; i < s.length(); i++)
@@ -40,9 +36,10 @@ struct Args
 // Parse arguments or throw error message
 std::optional<Args> ParseArgs(int argc, const char * argv[])
 {
-    if (argc != ARGC_SIZE)
+    if (argc != argcSize)
     {
-        std::cout << ARGC_COUNT << std::endl;
+        std::cout << argcCount << std::endl;
+
         return std::nullopt;
     }
     
@@ -50,27 +47,31 @@ std::optional<Args> ParseArgs(int argc, const char * argv[])
     {
         if (!IsNumber(argv[i+1]))
         {
-            std::cout << NOT_INT << std::endl;
+            std::cout << notInt << std::endl;
+
             return std::nullopt;
         }
     }
 
     if (std::stoi(argv[1]) < 0 || std::stoi(argv[2]) < 0)
     {
-        std::cout << NEGATIVE_VALUE << std::endl;
+        std::cout << negativeValue << std::endl;
+
         return std::nullopt;
     }
     
     if (std::stoi(argv[1]) > 255)
     {
-        std::cout << BYTE_SIZE << std::endl;
+        std::cout << byteSize << std::endl;
+
         return std::nullopt;
     }
 
     char ch = argv[3][0];
-    if (ch != LEFT_ROTATION && ch != RIGHT_ROTATION)
+    if (ch != leftRotation && ch != rightRotation)
     {
-        std::cout << INVALID_ROTATION << std::endl;
+        std::cout << invalidRotation << std::endl;
+
         return std::nullopt;
     }
     
@@ -82,20 +83,26 @@ std::optional<Args> ParseArgs(int argc, const char * argv[])
     return args;
 }
 
-uint32_t RotateLeft(uint32_t value, unsigned int count) {
-    return (value << count) | (value >> (SIZE_INT - count));
+uint32_t RotateLeft(uint32_t value, unsigned int count)
+{
+    return (value << count) | (value >> (sizeInt - count));
 }
 
-uint32_t RotateRight(uint32_t value, unsigned int count) {
+uint32_t RotateRight(uint32_t value, unsigned int count)
+{
     return (value >> count);
 }
 
 int main(int argc, const char * argv[]) {
-    std::ofstream output(OUTPUT_PATH);
+    std::ofstream output(outputPath);
     
     auto args = ParseArgs(argc, argv);
-    if (!args) return 1;
-    if (args->shiftDirection == RIGHT_ROTATION)
+    if (!args)
+    {
+        return 1;
+    }
+
+    if (args->shiftDirection == rightRotation)
     {
         std::cout << RotateRight(args->byte, args->shiftInterval) << std::endl;
         output << RotateRight(args->byte, args->shiftInterval) << std::endl;
@@ -108,5 +115,4 @@ int main(int argc, const char * argv[]) {
     }
 
     return 0;
-    
 }
