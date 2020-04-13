@@ -1,0 +1,6 @@
+The Red Square: Красная Площадь
+apple: яблоко
+cat: кошка
+fresh meat: свежее мясо
+red: красный
+meat: мясо
