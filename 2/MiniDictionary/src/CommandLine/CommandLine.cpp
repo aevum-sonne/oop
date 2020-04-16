@@ -1,6 +1,6 @@
-#include "MiniDictionaryUtils.h"
+#include "CommandLine.h"
 
-void ProcessCommandLine(MiniDictionary& miniDict)
+void CommandLine::ProcessCommandLine(MiniDictionary& miniDict)
 {
     std::string string = "";
 

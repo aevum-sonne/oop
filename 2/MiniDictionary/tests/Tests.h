@@ -3,6 +3,6 @@
 
 #include "../../../catch/catch.hpp"
 #include "../src/Args/Args.h"
-#include "MiniDictionaryUtils/MiniDictionaryUtils.h"
+#include "../src/CommandLine/CommandLine.h"
 
 std::string expectedTranslation, testWord, resultTranslation;
