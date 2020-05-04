@@ -9,19 +9,19 @@ CarController::CarController(Car& car, std::istream& input, std::ostream& output
                 {
                         {"Info",std::bind(&CarController::Info, this, std::placeholders::_1)},
                         {
-                         "EngineOn",  [this](std::istream &stream) {
+                         "EngineOn",  [this](std::istream& stream) {
                             return EngineOn(stream);
                         }},
                         {
-                         "EngineOff", [this](std::istream &stream) {
+                         "EngineOff", [this](std::istream& stream) {
                             return EngineOff(stream);
                         }},
                         {
-                         "SetSpeed",  [this](std::istream &stream) {
+                         "SetSpeed",  [this](std::istream& stream) {
                             return SetSpeed(stream);
                         }},
                         {
-                         "SetGear",   [this](std::istream &stream) {
+                         "SetGear",   [this](std::istream& stream) {
                             return SetGear(stream);
                         }},
                     })
@@ -66,7 +66,7 @@ bool CarController::Info(std::istream& args)
 }
 
 
-bool CarController::EngineOn(std::istream &args)
+bool CarController::EngineOn(std::istream& args)
 {
     if (m_car.TurnOnEngine())
     {
@@ -80,7 +80,7 @@ bool CarController::EngineOn(std::istream &args)
     return true;
 }
 
-bool CarController::EngineOff(std::istream &args)
+bool CarController::EngineOff(std::istream& args)
 {
     if (m_car.TurnOffEngine())
     {
