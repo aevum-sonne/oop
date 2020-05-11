@@ -244,20 +244,12 @@ BOOST_FIXTURE_TEST_SUITE(ShapesControllerPrintShapeWithMinimumPerimeter, ShapesC
 
     BOOST_AUTO_TEST_CASE(print_correct_min_shape_one_shape)
     {
-        std::stringstream ss;
-
-        ss << ShapeMessages::MIN_PERIMETER;
-        ss << std::fixed << std::setprecision(3);
-        ss << "Shape: Triangle" << std::endl;
-        ss << "Area: " << 500.000 << std::endl;
-        ss << "Perimeter: " << 105.977 << std::endl;
-        ss << "Outline color: #" << "d56851" << std::endl;
-        ss << "Fill color: #" << "50251c" << std::endl;
-        ss << "Vertex 1: " << "(-10.000; 0.000)" << std::endl;
-        ss << "Vertex 2: " << "(0.000; 25.000)" << std::endl;
-        ss << "Vertex 3: " << "(30.000; 0.000)" << std::endl;
-
-        std::string expectedOutput = ss.str();
+        std::string expectedOutput = std::string(ShapeMessages::MIN_PERIMETER)
+                                     + "Shape: Triangle\nArea: 500.000\n"
+                                       "Perimeter: 105.977\nOutline color: #d56851\n"
+                                       "Fill color: #50251c\nVertex 1: (-10.000; 0.000)"
+                                       "\nVertex 2: (0.000; 25.000)\n"
+                                       "Vertex 3: (30.000; 0.000)\n";
 
         ShapesController shapesControllerMinPerimeter(input, output);
         std::string command = "triangle -10 0 0 25 30 0 d56851 50251c";
@@ -271,20 +263,12 @@ BOOST_FIXTURE_TEST_SUITE(ShapesControllerPrintShapeWithMinimumPerimeter, ShapesC
 
     BOOST_AUTO_TEST_CASE(print_correct_min_shape_several_shapes)
     {
-        std::stringstream ss;
-
-        ss << ShapeMessages::MIN_PERIMETER;
-        ss << std::fixed << std::setprecision(3);
-        ss << "Shape: Triangle" << std::endl;
-        ss << "Area: " << 500.000 << std::endl;
-        ss << "Perimeter: " << 105.977 << std::endl;
-        ss << "Outline color: #" << "d56851" << std::endl;
-        ss << "Fill color: #" << "50251c" << std::endl;
-        ss << "Vertex 1: " << "(-10.000; 0.000)" << std::endl;
-        ss << "Vertex 2: " << "(0.000; 25.000)" << std::endl;
-        ss << "Vertex 3: " << "(30.000; 0.000)" << std::endl;
-
-        std::string expectedOutput = ss.str();
+        std::string expectedOutput = std::string(ShapeMessages::MIN_PERIMETER)
+                                    + "Shape: Triangle\nArea: 500.000\n"
+                                      "Perimeter: 105.977\nOutline color: #d56851\n"
+                                      "Fill color: #50251c\nVertex 1: (-10.000; 0.000)"
+                                      "\nVertex 2: (0.000; 25.000)\n"
+                                      "Vertex 3: (30.000; 0.000)\n";
 
         ShapesController shapesControllerMinPerimeter(input, output);
         std::string command = "triangle -10 0 0 25 30 0 d56851 50251c";
@@ -321,20 +305,12 @@ BOOST_FIXTURE_TEST_SUITE(ShapesControllerPrintShapeWithMaximumArea, ShapesContro
 
     BOOST_AUTO_TEST_CASE(print_correct_max_shape_one_shape)
     {
-        std::stringstream ss;
-
-        ss << ShapeMessages::MAX_AREA;
-        ss << std::fixed << std::setprecision(3);
-        ss << "Shape: Triangle" << std::endl;
-        ss << "Area: " << 500.000 << std::endl;
-        ss << "Perimeter: " << 105.977 << std::endl;
-        ss << "Outline color: #" << "d56851" << std::endl;
-        ss << "Fill color: #" << "50251c" << std::endl;
-        ss << "Vertex 1: " << "(-10.000; 0.000)" << std::endl;
-        ss << "Vertex 2: " << "(0.000; 25.000)" << std::endl;
-        ss << "Vertex 3: " << "(30.000; 0.000)" << std::endl;
-
-        std::string expectedOutput = ss.str();
+        std::string expectedOutput = std::string(ShapeMessages::MAX_AREA)
+                                     + "Shape: Triangle\nArea: 500.000\n"
+                                       "Perimeter: 105.977\nOutline color: #d56851\n"
+                                       "Fill color: #50251c\nVertex 1: (-10.000; 0.000)"
+                                       "\nVertex 2: (0.000; 25.000)\n"
+                                       "Vertex 3: (30.000; 0.000)\n";
 
         ShapesController shapesControllerMaxArea(input, output);
         std::string command = "triangle -10 0 0 25 30 0 d56851 50251c";
@@ -348,20 +324,12 @@ BOOST_FIXTURE_TEST_SUITE(ShapesControllerPrintShapeWithMaximumArea, ShapesContro
 
     BOOST_AUTO_TEST_CASE(print_correct_max_shape_several_shapes)
     {
-        std::stringstream ss;
-
-        ss << ShapeMessages::MAX_AREA;
-        ss << std::fixed << std::setprecision(3);
-        ss << "Shape: Triangle" << std::endl;
-        ss << "Area: " << 500.000 << std::endl;
-        ss << "Perimeter: " << 105.977 << std::endl;
-        ss << "Outline color: #" << "d56851" << std::endl;
-        ss << "Fill color: #" << "50251c" << std::endl;
-        ss << "Vertex 1: " << "(-10.000; 0.000)" << std::endl;
-        ss << "Vertex 2: " << "(0.000; 25.000)" << std::endl;
-        ss << "Vertex 3: " << "(30.000; 0.000)" << std::endl;
-
-        std::string expectedOutput = ss.str();
+        std::string expectedOutput = std::string(ShapeMessages::MAX_AREA)
+                                     + "Shape: Triangle\nArea: 500.000\n"
+                                       "Perimeter: 105.977\nOutline color: #d56851\n"
+                                       "Fill color: #50251c\nVertex 1: (-10.000; 0.000)"
+                                       "\nVertex 2: (0.000; 25.000)\n"
+                                       "Vertex 3: (30.000; 0.000)\n";
 
         ShapesController shapesControllerMaxArea(input, output);
         std::string command = "triangle -10 0 0 25 30 0 d56851 50251c";

@@ -11,5 +11,5 @@ struct Point
     bool operator<(double delta) const;
     Point operator-(const Point& point) const;
 
-    friend std::ostream& operator<< (std::ostream& out, const Point& point);
+    friend std::ostream& operator<<(std::ostream& out, const Point& point);
 };

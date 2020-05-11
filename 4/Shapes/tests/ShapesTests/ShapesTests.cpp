@@ -68,6 +68,15 @@ BOOST_FIXTURE_TEST_SUITE(TriangleSuite, Triangle_)
                    < MathConstants::ACCEPTABLE_DELTA);
     }
 
+    BOOST_AUTO_TEST_CASE(is_correct_info)
+    {
+        std::string expectedOutput = "Shape: Triangle\nArea: 500.000\nPerimeter: 105.977\nOutline color: #d56851\n"
+                      "Fill color: #50251c\nVertex 1: (-10.000; 0.000)\nVertex 2: (0.000; 25.000)\n"
+                      "Vertex 3: (30.000; 0.000)\n";
+
+        BOOST_CHECK_EQUAL(expectedOutput, triangle.ToString());
+    }
+
 BOOST_AUTO_TEST_SUITE_END()
 
 struct Rectangle_
@@ -132,6 +141,15 @@ BOOST_FIXTURE_TEST_SUITE(RectangleSuite, Rectangle_)
                    < MathConstants::ACCEPTABLE_DELTA);
     }
 
+    BOOST_AUTO_TEST_CASE(is_correct_info)
+    {
+        std::string expectedOutput = "Shape: Rectangle\nArea: 104.188\nPerimeter: 41.560\nOutline color: #a28594\n"
+                                     "Fill color: #c94253\nWidth: 8.450\nHeight: 12.330\nLeft top point: (-2.900; 10.330)"
+                                     "\nRight bottom point: (5.550; -2.000)\n";
+
+        BOOST_CHECK_EQUAL(expectedOutput, rectangle.ToString());
+    }
+
 BOOST_AUTO_TEST_SUITE_END()
 
 struct Circle_
@@ -184,13 +202,22 @@ BOOST_FIXTURE_TEST_SUITE(CircleSuite, Circle_)
                    < MathConstants::ACCEPTABLE_DELTA);
     }
 
+    BOOST_AUTO_TEST_CASE(is_correct_info)
+    {
+        std::string expectedOutput = "Shape: Circle\nArea: 918.633\nPerimeter: 107.442\nOutline color: #f84932\n"
+                                     "Fill color: #d48442\nCenter point: (-2.900; 10.330)"
+                                     "\nRadius: 17.100\n";
+
+        BOOST_CHECK_EQUAL(expectedOutput, circle.ToString());
+    }
+
 BOOST_AUTO_TEST_SUITE_END()
 
 struct LineSegment_
 {
     const Point expectedStartPoint = {30, 40};
     const Point expectedEndPoint = {10, 20};
-    const std::uint32_t expectedOutline = std::stoul("000000", nullptr, MathConstants::STOUL_BASE);
+    const std::uint32_t expectedOutline = std::stoul("f00000", nullptr, MathConstants::STOUL_BASE);
 
     const double expectedPerimeter = 28.284;
 
@@ -222,6 +249,14 @@ BOOST_FIXTURE_TEST_SUITE(LineSegmentSuite, LineSegment_)
         std::cout << lineSegment.GetPerimeter() << std::endl;
         BOOST_TEST(std::fabs(LineSegment_::expectedPerimeter - lineSegment.GetPerimeter())
             < MathConstants::ACCEPTABLE_DELTA);
+    }
+
+    BOOST_AUTO_TEST_CASE(is_correct_info)
+    {
+        std::string expectedOutput = "Shape: Line Segment\nArea: 0.000\nPerimeter: 28.284\nOutline color: #f00000\n"
+                                     "Start point: (30.000; 40.000)\nEnd point: (10.000; 20.000)\n";
+
+        BOOST_CHECK_EQUAL(expectedOutput, lineSegment.ToString());
     }
 
 BOOST_AUTO_TEST_SUITE_END()

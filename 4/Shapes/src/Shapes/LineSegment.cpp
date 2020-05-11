@@ -29,7 +29,7 @@ std::string LineSegment::ToString() const
     ss << "Area: " << GetArea() << std::endl;
     ss << "Perimeter: " << GetPerimeter() << std::endl;
     ss << "Outline color: #" << std::hex << m_outline << std::endl;
-    ss << "Start point: #" << m_startPoint << std::endl;
+    ss << "Start point: " << m_startPoint << std::endl;
     ss << "End point: " << m_endPoint << std::endl;
 
     return ss.str();
