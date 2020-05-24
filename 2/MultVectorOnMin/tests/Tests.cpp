@@ -84,3 +84,12 @@ TEST_CASE("Ascending sort")
 
     REQUIRE(resultVector == expectedVector);
 }
+
+TEST_CASE("3 zeroes")
+{
+    expectedVector = {0, 0, 0};
+    testVector = {0, 0, 0};
+    resultVector = SortVector(testVector);
+
+    REQUIRE(resultVector == expectedVector);
+}
