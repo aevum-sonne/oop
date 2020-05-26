@@ -42,7 +42,7 @@ private:
     static std::string ProtocolToString(const Protocol& protocol);
     static std::string ToLowerCase(std::string string);
 
-    const unsigned short URL_COMPONENTS_COUNT = 7;
+    const unsigned short URL_COMPONENTS_COUNT = 5;
 
     std::string m_url, m_domain, m_document;
     Protocol m_protocol;

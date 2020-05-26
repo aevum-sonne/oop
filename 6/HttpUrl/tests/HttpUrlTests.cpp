@@ -12,6 +12,7 @@ BOOST_AUTO_TEST_SUITE(verify_correct_initialization_of_constructors)
         {
             BOOST_CHECK_NO_THROW(HttpUrl httpUrl("https://questionoverflow.com:505/question.txt"));
             BOOST_CHECK_NO_THROW(HttpUrl httpUrl("https://questionoverflow.com/question.txt"));
+            BOOST_CHECK_NO_THROW(HttpUrl httpUrl("https://questionoverflow.com"));
         }
 
         BOOST_AUTO_TEST_CASE(incorrect_construction_with_incorrect_protocol_in_url)
@@ -112,6 +113,21 @@ BOOST_AUTO_TEST_SUITE(correct_print_info_about_url)
                                   "Domain: questionoverflow.com\n"
                                   "Port: 443\n"
                                   "Document: /question.txt\n";
+
+        std::stringstream ss;
+        httpsUrl.Print(ss);
+
+        BOOST_CHECK_EQUAL(expectedOut, ss.str());
+    }
+
+    BOOST_AUTO_TEST_CASE(correct_info_output_about_lower_case_url_without_document)
+    {
+        HttpUrl httpsUrl("https://questionoverflow.com");
+        std::string expectedOut = "URL: https://questionoverflow.com/\n"
+                                  "Protocol: HTTPS\n"
+                                  "Domain: questionoverflow.com\n"
+                                  "Port: 443\n"
+                                  "Document: /\n";
 
         std::stringstream ss;
         httpsUrl.Print(ss);

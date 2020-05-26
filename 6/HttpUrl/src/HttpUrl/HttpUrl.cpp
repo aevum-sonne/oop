@@ -68,10 +68,8 @@ void HttpUrl::ValidateDomain(const std::string& domain)
     {
         throw UrlParsingError(ParsingMessages::INVALID_DOMAIN);
     }
-    else
-    {
-        m_domain = domain;
-    }
+
+    m_domain = domain;
 }
 
 void HttpUrl::ValidatePort(const int port)
@@ -105,8 +103,8 @@ void HttpUrl::ValidateUrl(const std::string& url)
     m_url = urlComponents[0];
     ValidateProtocol(urlComponents[1]);
     ValidateDomain(urlComponents[2]);
-    ValidateDocument(urlComponents[4]);
 
+    // If port isn't specified, set default port for current protocol
     if (std::string() != urlComponents[3])
     {
         ValidatePort(std::stoi(urlComponents[3]));
@@ -115,11 +113,22 @@ void HttpUrl::ValidateUrl(const std::string& url)
     {
         SetDefaultPort(m_protocol);
     }
+
+    // Handle empty document
+    if (std::string() != urlComponents[4])
+    {
+        ValidateDocument(urlComponents[4]);
+    }
+    else
+    {
+        m_document = "/";
+        m_url += m_document;
+    }
 }
 
 std::smatch HttpUrl::SplitUrl(const std::string& url)
 {
-    std::regex regex("(http|https)://([^/ :]+):?([^/ ]*)(/?[^ #?]*)\\x3f?([^ #]*)#?([^ ]*)");
+    std::regex regex("(http|https)://([^/ :]+):?([^/ ]*)(/?[^ #?]*)");
     std::smatch smatch;
 
     if (!std::regex_search(url, smatch, regex))
