@@ -26,48 +26,40 @@ void FindMaxExController::ParseCommandLine()
 
 void FindMaxExController::ParseArgs(const std::string& args)
 {
-    std::vector<std::string> sportsmanProperties;
-    boost::split(sportsmanProperties, args, boost::is_any_of(" "));
+    std::vector<std::string> properties;
+    boost::split(properties, args, boost::is_any_of(" "));
 
-    if (SPORTSMAN_PROPERTIES_COUNT != sportsmanProperties.size())
+    VerifyProperties(properties);
+
+    FullName name {properties[0],
+                   properties[1],
+                   properties[2]};
+
+    unsigned short height, weight;
+    height = std::stoi(properties[3]);
+    weight = std::stoi(properties[4]);
+
+    Sportsman sportsman = {name, height, weight};
+    m_sportsmen.push_back(sportsman);
+}
+
+void FindMaxExController::VerifyProperties(const std::vector<std::string>& properties)
+{
+    if (SPORTSMAN_PROPERTIES_COUNT != properties.size())
     {
         throw std::invalid_argument("Invalid arguments count.");
     }
 
-    auto nameProperties = std::vector<std::string>(sportsmanProperties.begin(),
-            sportsmanProperties.end() - 2);
-
-    if (!ContainsCorrectFullNameProperties(nameProperties))
+    if (!ContainsCorrectFullNameProperties(properties))
     {
         throw std::invalid_argument("Invalid name argument.");
     }
 
-    auto bodyProperties = std::vector<std::string>(sportsmanProperties.begin() + 3,
-            sportsmanProperties.end());
-
-    if (!ContainsCorrectBodyProperties(bodyProperties))
+    if (!ContainsCorrectBodyProperties(properties))
     {
         throw std::invalid_argument("Invalid body parameter argument (contains non-digit "
                                     "characters or negative).");
     }
-
-    FullName name {sportsmanProperties[0],
-                   sportsmanProperties[1],
-                   sportsmanProperties[2]};
-
-    unsigned short height, weight;
-    try
-    {
-        height = std::stoi(sportsmanProperties[3]);
-        weight = std::stoi(sportsmanProperties[4]);
-    }
-    catch (const std::exception& e)
-    {
-        throw std::invalid_argument("Invalid body parameter argument (too big value).");
-    }
-
-    Sportsman sportsman = {name, height, weight};
-    m_sportsmen.push_back(sportsman);
 }
 
 bool FindMaxExController::IsName(const std::string& name)
@@ -82,7 +74,9 @@ bool FindMaxExController::IsBodyParameter(const std::string& parameter)
 
 bool FindMaxExController::ContainsCorrectFullNameProperties(std::vector<std::string> properties)
 {
-    for (auto& p : properties)
+    auto nameProperties = std::vector<std::string>(properties.begin(), properties.end() - 2);
+
+    for (auto& p : nameProperties)
     {
         if (!IsName(p))
         {
@@ -95,7 +89,9 @@ bool FindMaxExController::ContainsCorrectFullNameProperties(std::vector<std::str
 
 bool FindMaxExController::ContainsCorrectBodyProperties(std::vector<std::string> properties)
 {
-    for (auto& p : properties)
+    auto bodyProperties = std::vector<std::string>(properties.begin() + 3, properties.end());
+
+    for (auto& p : bodyProperties)
     {
         if (!IsBodyParameter(p))
         {

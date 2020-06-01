@@ -16,6 +16,7 @@ public:
     bool IsSportsmenWereAdded();
 
 private:
+    static void VerifyProperties(const std::vector<std::string>& properties);
     static bool IsName(const std::string& name);
     static bool IsBodyParameter(const std::string& parameter);
 
